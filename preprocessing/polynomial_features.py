@@ -5,17 +5,20 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
 class PolynomialFeatures():
     
-    def __init__(self, degree=2,include_bias=True):
+    def __init__(self,degree=2,include_bias=True):
         """
         Inputs:
         param degree : (int) max degree of polynomial features
         param include_bias : (boolean) specifies wheter to include bias term in returned feature array.
         """
-        
-        
-        pass
+        self.degree = degree
+        self.include_bias = include_bias
 
     
     def transform(self,X):
@@ -30,8 +33,25 @@ class PolynomialFeatures():
         Outputs:
         returns (np.array) Tranformed dataset.
         """
-        
-        pass
+        if self.degree == 2:
+            poly = np.zeros(6)
+                
+        if self.include_bias == True:
+            poly[0] = 1             # bias term
+            poly[1] = X[0]
+            poly[2] = X[1]
+            poly[3] = X[0]**2
+            poly[4] = X[0]*X[1]
+            poly[5] = X[1]**2
+        else:
+            poly = np.zeros(5)
+            poly[0] = X[0]
+            poly[1] = X[1]
+            poly[2] = X[0]**2
+            poly[3] = X[0]*X[1]
+            poly[4] = X[1]**2
+
+        return poly
     
         
         
