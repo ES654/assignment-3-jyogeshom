@@ -1,8 +1,7 @@
 # ES654-2020 Assignment 3
 
-*Your Name* - *Your Roll Number*
+*Yogesh Singh* - *18350008*
 
 ------
 
-> Write the answers for the subjective questions here
-
+> As d is increased, the accuracy of the regressor increases.
