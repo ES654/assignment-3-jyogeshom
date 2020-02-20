@@ -27,6 +27,32 @@ class LinearRegression():
 
         :return None
         '''
+        for i in range(n_itr):
+            for k in range(theta.size+1): 
+                for j in range(n_samples):
+                    if batch_size == 1:
+                        y       = X_df.loc[j,'y']
+                        z       = X_df.loc[j,'1':str(colNum-1)]
+                        y_hat   = theta_not + (theta * z)
+                    else:
+                        y       = X_df.loc[j,'y']
+                        z       = X_df.loc[j,'1':str(colNum-1)]
+                        y_hat   = theta_not + sum(theta * z)
+
+                    if k == 0:
+                        error   = (y - y_hat)
+
+                        theta_not = theta_not - lr* (-2*error*(-1))
+                    else:
+
+                        X_j     = X_df.loc[j,str(k)]
+
+                        error   = (y - y_hat) * X_j
+
+                        if lr_type == 'constant':
+                            theta[j] = theta[j] - lr* (-2*error*X_j)
+                        else:
+                            theta[j] = theta[j] - (lr/i)* (-2*error*X_j)
 
         pass
 
@@ -44,7 +70,32 @@ class LinearRegression():
 
         :return None
         '''
+        for i in range(n_itr):
+            for k in range(theta.size+1): 
+                for j in range(n_samples):
+                    if batch_size == 1:
+                        y       = X_df.loc[j,'y']
+                        z       = X_df.loc[j,'1':str(colNum-1)]
+                        y_hat   = theta_not + (theta * z)
+                    else:
+                        y       = X_df.loc[j,'y']
+                        z       = X_df.loc[j,'1':str(colNum-1)]
+                        y_hat   = theta_not + sum(theta * z)
 
+                    if k == 0:
+                        error   = (y - y_hat)
+
+                        theta_not = theta_not - lr* (-2*error*(-1))
+                    else:
+
+                        X_j     = X_df.loc[j,str(k)]
+
+                        error   = (y - y_hat) * X_j
+
+                        if lr_type == 'constant':
+                            theta[j] = theta[j] - lr* (-2*error*X_j)
+                        else:
+                            theta[j] = theta[j] - (lr/i)* (-2*error*X_j)
         pass
 
     def fit_autograd(self, X, y, batch_size, n_iter=100, lr=0.01, lr_type='constant'):
